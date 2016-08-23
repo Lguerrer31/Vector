@@ -17,7 +17,7 @@ public class Ejercicio extends javax.swing.JFrame {
      * Creates new form Ejercicio
      */
     double v[];
-    
+
     public Ejercicio() {
         initComponents();
     }
@@ -40,7 +40,8 @@ public class Ejercicio extends javax.swing.JFrame {
         cmdCrear = new javax.swing.JButton();
         cmdMostrar = new javax.swing.JButton();
         cmdLlenar = new javax.swing.JButton();
-        cmdBorrar = new javax.swing.JButton();
+        cmdB = new javax.swing.JButton();
+        cmdLA = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtRes = new javax.swing.JTextArea();
@@ -92,24 +93,33 @@ public class Ejercicio extends javax.swing.JFrame {
         jPanel3.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         cmdLlenar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        cmdLlenar.setText("Llenar");
+        cmdLlenar.setText("Llenado manual");
         cmdLlenar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLlenarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdLlenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+        jPanel3.add(cmdLlenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        cmdBorrar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        cmdBorrar.setText("Borrar");
-        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+        cmdB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        cmdB.setText("Borrar");
+        cmdB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdBorrarActionPerformed(evt);
+                cmdBActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        jPanel3.add(cmdB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 150, 200));
+        cmdLA.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        cmdLA.setText("Llenado automatico");
+        cmdLA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLAActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmdLA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 150, 240));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -155,27 +165,27 @@ public class Ejercicio extends javax.swing.JFrame {
         } else {
             longitud = Integer.parseInt(txtLongitud.getText());
             v = new double[longitud];
-            
+
             JOptionPane.showMessageDialog(this, "Vector creado satisfactoriamente");
             txtLongitud.setText("");
         }
     }//GEN-LAST:event_cmdCrearActionPerformed
 
-    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+    private void cmdBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBActionPerformed
         // TODO add your handling code here:
         txtLongitud.setText("");
         txtRes.setText("");
         v = null;
         txtLongitud.requestFocusInWindow();
-    }//GEN-LAST:event_cmdBorrarActionPerformed
+    }//GEN-LAST:event_cmdBActionPerformed
 
     private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (!Character.isDigit(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
         }
     }//GEN-LAST:event_txtLongitudKeyTyped
@@ -192,9 +202,19 @@ public class Ejercicio extends javax.swing.JFrame {
     private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
         // TODO add your handling code here:
         for (int i = 0; i < v.length; i++) {
-            txtRes.append("" + v[i]+"\n");
+            txtRes.append("" + v[i] + "\n");
         }
     }//GEN-LAST:event_cmdMostrarActionPerformed
+
+    private void cmdLAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLAActionPerformed
+        // TODO add your handling code here:
+        double n;
+        for (int i = 0; i < v.length; i++) {
+            n = (int) (Math.random()*25+1);
+            v[i] = n;
+        }
+        JOptionPane.showMessageDialog(this, "Vector llenado satisfactoriamente");
+    }//GEN-LAST:event_cmdLAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,8 +252,9 @@ public class Ejercicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdBorrar;
+    private javax.swing.JButton cmdB;
     private javax.swing.JButton cmdCrear;
+    private javax.swing.JButton cmdLA;
     private javax.swing.JButton cmdLlenar;
     private javax.swing.JButton cmdMostrar;
     private javax.swing.JLabel jLabel1;
