@@ -16,6 +16,8 @@ public class Ejercicio extends javax.swing.JFrame {
     /**
      * Creates new form Ejercicio
      */
+    double v[];
+    
     public Ejercicio() {
         initComponents();
     }
@@ -82,10 +84,20 @@ public class Ejercicio extends javax.swing.JFrame {
 
         cmdMostrar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cmdMostrar.setText("Mostrar");
+        cmdMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdMostrarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         cmdLlenar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cmdLlenar.setText("Llenar");
+        cmdLlenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLlenarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdLlenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         cmdBorrar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -132,15 +144,20 @@ public class Ejercicio extends javax.swing.JFrame {
 
     private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
         // TODO add your handling code here:
+        int longitud;
         txtRes.setText("");
-        if (txtLongitud.getText().trim().isEmpty()){
+        if (txtLongitud.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Digite la longitud del vector", "Error", JOptionPane.ERROR_MESSAGE);
             txtLongitud.requestFocusInWindow();
         } else if (txtLongitud.getText().trim().equalsIgnoreCase("0")) {
             JOptionPane.showMessageDialog(this, "La longitud debe ser mayor que cero", "Error", JOptionPane.ERROR_MESSAGE);
             txtLongitud.requestFocusInWindow();
         } else {
+            longitud = Integer.parseInt(txtLongitud.getText());
+            v = new double[longitud];
             
+            JOptionPane.showMessageDialog(this, "Vector creado satisfactoriamente");
+            txtLongitud.setText("");
         }
     }//GEN-LAST:event_cmdCrearActionPerformed
 
@@ -148,19 +165,36 @@ public class Ejercicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         txtLongitud.setText("");
         txtRes.setText("");
+        v = null;
         txtLongitud.requestFocusInWindow();
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-
+        
         if (!Character.isDigit(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
         }
     }//GEN-LAST:event_txtLongitudKeyTyped
+
+    private void cmdLlenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarActionPerformed
+        // TODO add your handling code here:
+        double n;
+        for (int i = 0; i < v.length; i++) {
+            n = Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento en la posición " + i));
+            v[i] = n;
+        }
+    }//GEN-LAST:event_cmdLlenarActionPerformed
+
+    private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0; i < v.length; i++) {
+            txtRes.append("" + v[i]+"\n");
+        }
+    }//GEN-LAST:event_cmdMostrarActionPerformed
 
     /**
      * @param args the command line arguments
