@@ -20,6 +20,9 @@ public class Ejercicio extends javax.swing.JFrame {
 
     public Ejercicio() {
         initComponents();
+        cmdLlenar.setEnabled(false);
+        cmdLA.setEnabled(false);
+        cmdMostrar.setEnabled(false);
     }
 
     /**
@@ -150,6 +153,7 @@ public class Ejercicio extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
@@ -167,7 +171,12 @@ public class Ejercicio extends javax.swing.JFrame {
             v = new double[longitud];
 
             JOptionPane.showMessageDialog(this, "Vector creado satisfactoriamente");
-            txtLongitud.setText("");
+            txtLongitud.setEditable(false);
+
+            cmdCrear.setEnabled(false);
+            cmdLA.setEnabled(true);
+            cmdLlenar.setEnabled(true);
+            cmdMostrar.setEnabled(false);
         }
     }//GEN-LAST:event_cmdCrearActionPerformed
 
@@ -177,6 +186,11 @@ public class Ejercicio extends javax.swing.JFrame {
         txtRes.setText("");
         v = null;
         txtLongitud.requestFocusInWindow();
+        txtLongitud.setEditable(true);
+        cmdLlenar.setEnabled(false);
+        cmdLA.setEnabled(false);
+        cmdMostrar.setEnabled(false);
+        cmdCrear.setEnabled(true);
     }//GEN-LAST:event_cmdBActionPerformed
 
     private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
@@ -197,6 +211,11 @@ public class Ejercicio extends javax.swing.JFrame {
             n = Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento en la posición " + i));
             v[i] = n;
         }
+        txtLongitud.setEditable(false);
+        cmdCrear.setEnabled(false);
+        cmdLA.setEnabled(false);
+        cmdLlenar.setEnabled(false);
+        cmdMostrar.setEnabled(true);
     }//GEN-LAST:event_cmdLlenarActionPerformed
 
     private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
@@ -204,16 +223,27 @@ public class Ejercicio extends javax.swing.JFrame {
         for (int i = 0; i < v.length; i++) {
             txtRes.append("" + v[i] + "\n");
         }
+        txtLongitud.setEditable(false);
+        cmdCrear.setEnabled(false);
+        cmdLA.setEnabled(false);
+        cmdLlenar.setEnabled(false);
+        cmdMostrar.setEnabled(false);
+        cmdB.setEnabled(true);
     }//GEN-LAST:event_cmdMostrarActionPerformed
 
     private void cmdLAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLAActionPerformed
         // TODO add your handling code here:
         double n;
         for (int i = 0; i < v.length; i++) {
-            n = (int) (Math.random()*25+1);
+            n = (int) (Math.random() * 25 + 1);
             v[i] = n;
         }
         JOptionPane.showMessageDialog(this, "Vector llenado satisfactoriamente");
+        cmdCrear.setEnabled(false);
+        cmdLA.setEnabled(false);
+        cmdLlenar.setEnabled(false);
+        cmdMostrar.setEnabled(true);
+        txtLongitud.setEditable(false);
     }//GEN-LAST:event_cmdLAActionPerformed
 
     /**
