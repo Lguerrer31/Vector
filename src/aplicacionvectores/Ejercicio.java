@@ -159,24 +159,25 @@ public class Ejercicio extends javax.swing.JFrame {
     private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
         // TODO add your handling code here:
         int longitud;
-        txtRes.setText("");
+
         if (txtLongitud.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Digite la longitud del vector", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Digite la longitud", "Error", JOptionPane.ERROR_MESSAGE);
             txtLongitud.requestFocusInWindow();
-        } else if (txtLongitud.getText().trim().equalsIgnoreCase("0")) {
+        } else if (Integer.parseInt(txtLongitud.getText().trim()) == 0) {
             JOptionPane.showMessageDialog(this, "La longitud debe ser mayor que cero", "Error", JOptionPane.ERROR_MESSAGE);
             txtLongitud.requestFocusInWindow();
+            txtLongitud.selectAll();
         } else {
             longitud = Integer.parseInt(txtLongitud.getText());
             v = new double[longitud];
-
-            JOptionPane.showMessageDialog(this, "Vector creado satisfactoriamente");
-            txtLongitud.setEditable(false);
+            JOptionPane.showMessageDialog(this, "Vector Creado satisfactoriamente!");
 
             cmdCrear.setEnabled(false);
-            cmdLA.setEnabled(true);
             cmdLlenar.setEnabled(true);
+            cmdLA.setEnabled(true);
             cmdMostrar.setEnabled(false);
+            cmdB.setEnabled(true);
+            txtLongitud.setEditable(false);
         }
     }//GEN-LAST:event_cmdCrearActionPerformed
 
@@ -207,15 +208,28 @@ public class Ejercicio extends javax.swing.JFrame {
     private void cmdLlenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarActionPerformed
         // TODO add your handling code here:
         double n;
+        int aux;
         for (int i = 0; i < v.length; i++) {
-            n = Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento en la posición " + i));
-            v[i] = n;
+            do {
+                aux = 1;
+
+                try {
+                    n = Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el elemento en la posición: " + i));
+                    v[i] = n;
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Digite la información correctamente", "Error", JOptionPane.ERROR_MESSAGE);
+                    aux = 0;
+                } catch (NullPointerException e) {
+                    JOptionPane.showMessageDialog(this, "No es permitido salir", "Error", JOptionPane.ERROR_MESSAGE);
+                    aux = 0;
+                }
+            } while (aux == 0);
         }
-        txtLongitud.setEditable(false);
         cmdCrear.setEnabled(false);
-        cmdLA.setEnabled(false);
         cmdLlenar.setEnabled(false);
+        cmdLA.setEnabled(false);
         cmdMostrar.setEnabled(true);
+        cmdB.setEnabled(true);
     }//GEN-LAST:event_cmdLlenarActionPerformed
 
     private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
@@ -233,17 +247,19 @@ public class Ejercicio extends javax.swing.JFrame {
 
     private void cmdLAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLAActionPerformed
         // TODO add your handling code here:
-        double n;
+        int n;
         for (int i = 0; i < v.length; i++) {
             n = (int) (Math.random() * 25 + 1);
             v[i] = n;
         }
-        JOptionPane.showMessageDialog(this, "Vector llenado satisfactoriamente");
+
+        JOptionPane.showMessageDialog(this, "Vector llenado Satisfactoriamente");
+
         cmdCrear.setEnabled(false);
-        cmdLA.setEnabled(false);
         cmdLlenar.setEnabled(false);
+        cmdLA.setEnabled(false);
         cmdMostrar.setEnabled(true);
-        txtLongitud.setEditable(false);
+        cmdB.setEnabled(true);
     }//GEN-LAST:event_cmdLAActionPerformed
 
     /**
