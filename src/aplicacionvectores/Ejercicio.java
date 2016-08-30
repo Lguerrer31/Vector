@@ -23,6 +23,7 @@ public class Ejercicio extends javax.swing.JFrame {
         cmdLlenar.setEnabled(false);
         cmdLA.setEnabled(false);
         cmdMostrar.setEnabled(false);
+        txtLongitud.requestFocusInWindow();
     }
 
     /**
@@ -93,7 +94,7 @@ public class Ejercicio extends javax.swing.JFrame {
                 cmdMostrarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+        jPanel3.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         cmdLlenar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cmdLlenar.setText("Llenado manual");
@@ -111,7 +112,7 @@ public class Ejercicio extends javax.swing.JFrame {
                 cmdBActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        jPanel3.add(cmdB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
         cmdLA.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         cmdLA.setText("Llenado automatico");
@@ -120,7 +121,7 @@ public class Ejercicio extends javax.swing.JFrame {
                 cmdLAActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdLA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        jPanel3.add(cmdLA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 150, 240));
 
@@ -208,7 +209,8 @@ public class Ejercicio extends javax.swing.JFrame {
     private void cmdLlenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarActionPerformed
         // TODO add your handling code here:
         double n;
-        int aux;
+        boolean sw = true;
+        int aux, res;
         for (int i = 0; i < v.length; i++) {
             do {
                 aux = 1;
@@ -220,15 +222,23 @@ public class Ejercicio extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Digite la información correctamente", "Error", JOptionPane.ERROR_MESSAGE);
                     aux = 0;
                 } catch (NullPointerException e) {
-                    JOptionPane.showMessageDialog(this, "No es permitido salir", "Error", JOptionPane.ERROR_MESSAGE);
+                    res = JOptionPane.showConfirmDialog(this, "¿Desea salir?", "Saliar", JOptionPane.YES_NO_OPTION);
                     aux = 0;
+                    if (res == 0) {
+                        System.out.println(res);
+                        aux = 1;
+                        i = v.length;
+                        sw = false;
+                    } else {
+                        aux = 0;
+                    }
                 }
             } while (aux == 0);
         }
         cmdCrear.setEnabled(false);
         cmdLlenar.setEnabled(false);
         cmdLA.setEnabled(false);
-        cmdMostrar.setEnabled(true);
+        cmdMostrar.setEnabled(sw);
         cmdB.setEnabled(true);
     }//GEN-LAST:event_cmdLlenarActionPerformed
 
